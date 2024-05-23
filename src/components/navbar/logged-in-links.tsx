@@ -1,13 +1,13 @@
 import { SignedIn } from '@clerk/nextjs'
-import { currentUser } from '@clerk/nextjs/server'
+import { useUser } from '@clerk/nextjs'
 import Link from 'next/link'
 
 type Props = {}
 
 const LoggedInLinks = async (props: Props) => {
-  const user = await currentUser()
+  const user = await useUser()
   let isAdmin = false
-  if (user && user.publicMetadata.role == 'ADMIN') isAdmin = true
+  if (user && user.user?.publicMetadata.role == 'ADMIN') isAdmin = true
 
   return (
     <SignedIn>

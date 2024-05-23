@@ -1,4 +1,4 @@
-import { auth, currentUser } from '@clerk/nextjs'
+import { useAuth, useUser } from '@clerk/nextjs'
 import { unstable_cache } from 'next/cache'
 import { PROPERTY_CACHE } from '../../../cache/keys'
 import { ListingType } from '../../../components/listing/listings-board'
@@ -30,9 +30,9 @@ type Props = {
 const MyListingsPage = async ({ params }: Props) => {
   const pageNumber = params.page && typeof params.page === 'string' ? +params.page : 1
 
-  const user = await currentUser()
+  const user = await useUser()
   let userId
-  if (user && user.publicMetadata.role != 'ADMIN') userId = user.id
+  if (user && user.user?.publicMetadata.role != 'ADMIN') userId = user.user?.id
 
   const { data, error } = await myProperties('all', pageNumber, userId)
   if (error) throw error

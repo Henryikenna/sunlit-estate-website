@@ -1,4 +1,4 @@
-import { currentUser } from '@clerk/nextjs'
+import { useUser } from '@clerk/nextjs'
 import { serverClient } from '../../../supabase/config'
 import ScrapedRow from './scraper-row'
 
@@ -8,8 +8,8 @@ type Props = {
 }
 
 const ScrapedPage = async ({ params }: Props) => {
-  const user = await currentUser()
-  if (user && user.publicMetadata.role != 'ADMIN') return
+  const user = await useUser()
+  if (user && user.user?.publicMetadata.role != 'ADMIN') return
 
   const { data, error } = await serverClient.from('scraped_realtor_property').select().order('created_at', { ascending: false })
   if (error) throw error

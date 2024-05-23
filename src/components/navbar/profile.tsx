@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut, UserButton, auth, currentUser } from '@clerk/nextjs'
+import { SignedIn, SignedOut, UserButton, useAuth, useUser } from '@clerk/nextjs'
 import Link from 'next/link'
 
 type Props = {}

@@ -33,14 +33,14 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: 'property_images_property_id_fkey',
-            columns: ['property_id'],
-            isOneToOne: false,
-            referencedRelation: 'realtor_property',
+            foreignKeyName: 'property_images_property_id_fkey'
+            columns: ['property_id']
+            isOneToOne: false
+            referencedRelation: 'realtor_property'
             referencedColumns: ['id']
           },
         ]
-      }      
+      }
       realtor_property: {
         Row: {
           address: string | null

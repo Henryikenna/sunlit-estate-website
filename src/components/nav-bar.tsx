@@ -1,5 +1,5 @@
 import React from 'react'
-import { currentUser } from '@clerk/nextjs'
+import { useUser } from '@clerk/nextjs'
 import Profile from './navbar/profile'
 import Link from 'next/link'
 import LoggedInLinks from './navbar/logged-in-links'
