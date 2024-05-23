@@ -4,10 +4,15 @@ import Link from 'next/link'
 
 type Props = {}
 
-const LoggedInLinks = async (props: Props) => {
-  const user = await useUser()
+// const LoggedInLinks = async (props: Props) => {
+//   const user = await useUser
+//   let isAdmin = false
+//   if (user && user.user?.publicMetadata.role == 'ADMIN') isAdmin = true
+const LoggedInLinks = (props: Props) => {
+  // const { user } = useUser
   let isAdmin = false
-  if (user && user.user?.publicMetadata.role == 'ADMIN') isAdmin = true
+  // if (user && user.publicMetadata.role == 'ADMIN') isAdmin = true
+
 
   return (
     <SignedIn>
