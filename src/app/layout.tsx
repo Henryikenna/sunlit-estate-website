@@ -25,11 +25,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
+    <link rel="icon" href="/sunbelt-logo-transparent.png" sizes="any" />
       <ClerkProvider publishableKey='pk_test_c3RhYmxlLXdvcm0tNzkuY2xlcmsuYWNjb3VudHMuZGV2JA'>
         <body className={`${inter.className} antialiased`}>
-          <div className='h-screen'>
+          <div className=''>
             <NavBar />
-            <div className='mx-auto min-h-[75vh] max-w-[1920px]'>{children}</div>
+            <div className='mx-auto min-h-[75vh] max-w-[1920px]'>
+              {children}
+            </div>
             <Footer />
           </div>
           <SpeedInsights />

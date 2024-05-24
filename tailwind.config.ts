@@ -9,6 +9,12 @@ const config: Config = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
+    fontFamily: {
+      oswald: ["Oswald"],
+      openSans: ["Open Sans"],
+      racingSansOne: ["Racing Sans One"],
+      montserrat: ["Montserrat"],
+    },
   },
   plugins: [require('daisyui'), require('@tailwindcss/typography'), require('@tailwindcss/aspect-ratio')],
   daisyui: {
