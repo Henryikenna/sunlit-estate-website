@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 
 type Props = {}
 
-const NavBar = async (props: Props) => {
+const NavBar = (props: Props) => {
   const route = usePathname()
 
   const getLinkClass = (path: string) => (route === path ? 'font-openSans font-extrabold text-white text-base md:text-sm' : 'font-openSans font-semibold text-white opacity-80 text-base md:text-sm')
@@ -65,33 +65,36 @@ const NavBar = async (props: Props) => {
     // </div>
 
     <header className=' z-20 absolute w-full bg-transparent flex justify-between items-center px-6 py-4 md:py-6 lg:px-[3.75rem] lg:py-6'>
-      
-        <Link href='/' className='flex items-center gap-2'>
-          <div className='relative w-[2.1875rem] h-[2.1875rem] md:w-10 md:h-10 lg:w-[3.4375rem] lg:h-[3.4375rem]'>
-            <Image
-              src={'/sunbelt-logo-transparent.png'}
-              alt='Sunbelt logo'
-              // width={55}
-              // height={55}
-              layout='fill'
-              objectFit='cover'
-              className=''
-            />
-          </div>
-          <h4 className=" font-oswald font-bold text-white text-[0.545rem] w-[69px] md:text-[0.65rem] md:w-auto lg:text-sm lg:w-[111px]">Sunlit Carribbean Estates</h4>
-        </Link>
+      <Link href='/' className='flex items-center gap-2'>
+        <div className='relative w-[2.1875rem] h-[2.1875rem] md:w-10 md:h-10 lg:w-[3.4375rem] lg:h-[3.4375rem]'>
+          <Image
+            src={'/sunbelt-logo-transparent.png'}
+            alt='Sunbelt logo'
+            // width={55}
+            // height={55}
+            layout='fill'
+            objectFit='cover'
+            className=''
+          />
+        </div>
+        <h4 className=' font-oswald font-bold text-white text-[0.545rem] w-[69px] md:text-[0.65rem] md:w-auto lg:text-sm lg:w-[111px]'>Sunlit Carribbean Estates</h4>
+      </Link>
 
       <section className='hidden items-center gap-6 md:flex lg:flex'>
         <Link href='/' className={getLinkClass('/')}>
+          {/* <Link href='/'> */}
           Buy
         </Link>
         <Link href='/rent' className={getLinkClass('/rent')}>
+          {/* <Link href='/rent'>           */}
           Rent
         </Link>
         <Link href='/realtors' className={getLinkClass('/realtors')}>
+          {/* <Link href='/realtors'> */}
           Realtor
         </Link>
         <Link href='/aboutus' className={getLinkClass('/aboutus')}>
+          {/* <Link href='/aboutus'> */}
           About Us
         </Link>
       </section>
