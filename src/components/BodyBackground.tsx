@@ -29,7 +29,8 @@ const BodyBackground: React.FC<BodyBackgroundProps> = ({ isSearchInputVisible })
   };
 
   return (
-    <div className=' w-full h-[65dvh] lg:h-[60dvh]'>
+    // <div className=' w-full h-[65dvh] lg:h-[80dvh]'>
+    <div className=' w-full h-[50dvh] lg:h-[40dvh]'>
       <div className=' w-full h-full relative'>
         <Image src='/background.png' alt='Background Image' className='min-w-full min-h-full object-cover absolute brightness-75 -z-10' layout='fill' />
 
