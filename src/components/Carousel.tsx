@@ -216,16 +216,20 @@ const Carousel: React.FC<CarouselProps> = ({ id, images }) => {
           />
           <div className="absolute top-0 left-0 right-0 flex justify-between items-center content-center w-auto space-x-2 pt-5 px-4">
             <section className=" flex gap-1 md:gap-2">
-              <button className=" shadow-sm text-white text-[0.4375rem] bg-black bg-opacity-40 w-[0.9625rem] h-[0.9625rem] flex justify-center items-center rounded-full md:text-[0.8125rem] md:w-[1.625rem] md:h-[1.625rem]">
+              <button className=" shadow-sm text-white text-[0.4375rem] bg-black bg-opacity-70 w-[0.9625rem] h-[0.9625rem] flex justify-center items-center rounded-full md:text-[0.8125rem] md:w-[1.625rem] md:h-[1.625rem]">
+                {/* <IoBedOutline className="opacity-70" /> */}
                 <IoBedOutline />
               </button>
-              <button className=" shadow-sm text-white text-[0.4375rem] bg-black bg-opacity-40 w-[0.9625rem] h-[0.9625rem] flex justify-center items-center rounded-full md:text-[0.8125rem] md:w-[1.625rem] md:h-[1.625rem] transform scale-x-[-1]">
+              <button className=" shadow-sm text-white text-[0.4375rem] bg-black bg-opacity-70 w-[0.9625rem] h-[0.9625rem] flex justify-center items-center rounded-full md:text-[0.8125rem] md:w-[1.625rem] md:h-[1.625rem] transform scale-x-[-1]">
+                {/* <LiaBathSolid className="opacity-70" /> */}
                 <LiaBathSolid />
               </button>
-              <button className=" shadow-sm text-white text-[0.4375rem] bg-black bg-opacity-40 w-[0.9625rem] h-[0.9625rem] flex justify-center items-center rounded-full md:text-[0.8125rem] md:w-[1.625rem] md:h-[1.625rem] transform scale-x-[-1]">
+              <button className=" shadow-sm text-white text-[0.4375rem] bg-black bg-opacity-70 w-[0.9625rem] h-[0.9625rem] flex justify-center items-center rounded-full md:text-[0.8125rem] md:w-[1.625rem] md:h-[1.625rem] transform scale-x-[-1]">
+                {/* <LiaSwimmingPoolSolid className="opacity-70" /> */}
                 <LiaSwimmingPoolSolid />
               </button>
-              <button className=" shadow-sm text-white text-[0.4375rem] bg-black bg-opacity-40 w-[0.9625rem] h-[0.9625rem] flex justify-center items-center rounded-full md:text-[0.8125rem] md:w-[1.625rem] md:h-[1.625rem]">
+              <button className=" shadow-sm text-white text-[0.4375rem] bg-black bg-opacity-70 w-[0.9625rem] h-[0.9625rem] flex justify-center items-center rounded-full md:text-[0.8125rem] md:w-[1.625rem] md:h-[1.625rem]">
+                {/* <FaCheck className="opacity-70" /> */}
                 <FaCheck />
               </button>
             </section>
