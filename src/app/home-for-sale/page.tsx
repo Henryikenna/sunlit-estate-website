@@ -138,7 +138,7 @@ const HomeForSalePage = () => {
           <Carousel id={id} images={images} />
 
           <div key={id} className=' w-auto px-[0.625rem] pt-3 lg:pt-6 lg:px-[1.125rem]'>
-            <h4 className=' font-openSans text-[0.625rem] pb-3 font-semibold text-[#1E1E1E] opacity-80 lg:pb-6 lg:text-base'>{type}</h4>
+            {/* <h4 className=' font-openSans text-[0.625rem] pb-3 font-semibold text-[#1E1E1E] opacity-80 lg:pb-6 lg:text-base'>{type}</h4> */}
             <h4 className=' font-openSans text-[0.5625rem] pb-[0.4375rem] font-bold text-[#1E1E1E] opacity-90 lg:pb-3 lg:text-base'>{address}</h4>
             <h4 className=' font-openSans text-sm pb-[0.4375rem] font-extrabold text-[#1E1E1E] opacity-90 lg:pb-3 lg:text-lg'>{`€ ${price.toLocaleString()}`}</h4>
 
