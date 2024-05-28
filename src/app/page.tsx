@@ -144,7 +144,7 @@ export default function Home() {
           </button>
         </div>
 
-        <AppFilter />
+        <AppFilter isFilterTextVisible={true} />
       </div>
 
       {/* <HomeForSalePage />

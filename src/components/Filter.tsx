@@ -2,10 +2,16 @@ import { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
 
 
+
+
 const filterButtonsTextList = ['Any', '1', '2', '3', '4', '5', '6', '7', '8+']
 const areaTextList = ['Hato', 'Nikiboko', 'locate various', 'Noord Saliña', 'Belnem', 'Sabal Palm', 'Santa Barbara', 'Suikerpalm']
 
-const AppFilter = () => {
+interface AppFilterProps {
+  isFilterTextVisible: boolean
+}
+
+const AppFilter: React.FC<AppFilterProps> = ({ isFilterTextVisible }) => {
     
   const [selectedButton, setSelectedButton] = useState<number | null>(0)
 
@@ -25,7 +31,7 @@ const AppFilter = () => {
     <section className=''>
           <button
             onClick={openModal}
-            className=' flex gap-[0.5rem] h-full items-center justify-center no-animation md:bg-transparent text-[#1E1E1E] text-[0.5rem] font-semibold font-openSans md:rounded-3xl md:btn lg:btn-outline lg:border-1 lg:border-[#1E1E1E] lg:border-opacity-25  lg:w-28 lg:text-base hover:text-[#1E1E1E] hover:bg-transparent hover:border-white'
+            className={` ${isFilterTextVisible == false && 'btn w-auto rounded-full p-0 gap-0 lg:w-auto'} flex gap-[0.5rem] h-full items-center justify-center no-animation md:bg-transparent text-[#1E1E1E] text-[0.5rem] font-semibold font-openSans md:rounded-3xl md:btn lg:btn-outline lg:border-1 lg:border-[#1E1E1E] lg:border-opacity-25  lg:w-28 lg:text-base hover:text-[#1E1E1E] hover:bg-transparent hover:border-white`}
           >
             <svg
               className=' w-[0.875rem] md:w-4 lg:w-5'
@@ -43,7 +49,7 @@ const AppFilter = () => {
                 stroke-linecap='round'
               />
             </svg>
-            Filter
+            {isFilterTextVisible && "Filter"}
           </button>
 
           <dialog id='filter_modal' className='modal modal-bottom sm:modal-middle'>
