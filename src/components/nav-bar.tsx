@@ -8,7 +8,11 @@ import { usePathname } from 'next/navigation'
 
 type Props = {}
 
-const NavBar = (props: Props) => {
+interface NavBarProps {
+  doesNavbarHaveBackgroundColor: boolean
+}
+
+const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor }) => {
   const route = usePathname()
 
   const getLinkClass = (path: string) => (route === path ? 'font-openSans font-extrabold text-white text-base md:text-sm' : 'font-openSans font-semibold text-white opacity-80 text-base md:text-sm')
@@ -64,7 +68,7 @@ const NavBar = (props: Props) => {
     //   </div>
     // </div>
 
-    <header className=' z-20 absolute w-full bg-transparent flex justify-between items-center px-6 py-4 md:py-6 lg:px-[3.75rem] lg:py-6'>
+    <header className={` z-20 absolute w-full ${doesNavbarHaveBackgroundColor ? `bg-[#06384A]` : `bg-transparent`} h-[88px] flex justify-between items-center px-6 lg:px-[3.75rem]`}>
       <Link href='/' className='flex items-center gap-2'>
         <div className='relative w-[2.1875rem] h-[2.1875rem] md:w-10 md:h-10 lg:w-[3.4375rem] lg:h-[3.4375rem]'>
           <Image
@@ -81,7 +85,7 @@ const NavBar = (props: Props) => {
       </Link>
 
       <section className='hidden items-center gap-6 md:flex lg:flex'>
-        <Link href='/' className={getLinkClass('/')}>
+        <Link href='/buy' className={getLinkClass('/buy')}>
           {/* <Link href='/'> */}
           Buy
         </Link>
