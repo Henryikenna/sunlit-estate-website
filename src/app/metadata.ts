@@ -1,3 +1,5 @@
+'use strict'
+
 // src/app/metadata.ts
 import type { Metadata } from 'next'
 
