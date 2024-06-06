@@ -5,14 +5,17 @@ import Link from 'next/link'
 import LoggedInLinks from './navbar/logged-in-links'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { FiPlus } from "react-icons/fi";
+import CreateListingDialog from '@/components/CreateListingDialog'
 
 type Props = {}
 
 interface NavBarProps {
   doesNavbarHaveBackgroundColor: boolean
+  isUserSignedIn: boolean
 }
 
-const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor }) => {
+const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor, isUserSignedIn }) => {
   const route = usePathname()
 
   const getLinkClass = (path: string) => (route === path ? 'font-openSans font-extrabold text-white text-base md:text-sm' : 'font-openSans font-semibold text-white opacity-80 text-base md:text-sm')
@@ -103,12 +106,25 @@ const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor }) => {
         </Link>
       </section>
 
-      <section className=' hidden items-center gap-4 md:flex lg:flex'>
+      {isUserSignedIn === true ? <section className=' hidden items-center gap-4 md:flex lg:flex'>
+        {/* <button className='btn bg-white flex text-[#06384A] text-sm font-semibold font-openSans rounded-3xl md:text-base lg:text-base'><FiPlus /> Create Lisiting</button> */}
+        <CreateListingDialog />
+        <img className="rounded-full w-7 h-7 object-cover md:w-10 md:h-10 lg:w-14 lg:h-14" src="https://images.unsplash.com/photo-1716724854567-9ec995836d19?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" alt="" />
+          {/* <Image
+            src={'https://unsplash.com/photos/a-squirrel-eating-a-nut-in-a-field-of-daisies-igYIeewfnOs'}
+            alt='Profile Picture'
+            width={55}
+            height={55}
+            layout='fill'
+            objectFit='cover'
+            className='rounded-full w-14 h-14'
+          /> */}
+      </section> : <section className=' hidden items-center gap-4 md:flex lg:flex'>
         <button className='btn bg-white text-[#06384A] w-28 text-base font-semibold font-openSans rounded-3xl md:w-24'>Login</button>
         <button className='btn btn-outline border-2 border-white text-white w-28 text-base font-semibold font-openSans rounded-3xl md:w-24 hover:text-white hover:bg-transparent hover:border-white'>
           Sign up
         </button>
-      </section>
+      </section>}
 
       <section className='block md:hidden lg:hidden'>
         <svg width='34' height='20' viewBox='0 0 34 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
