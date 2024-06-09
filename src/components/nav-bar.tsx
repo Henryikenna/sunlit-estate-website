@@ -92,6 +92,10 @@ const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor, isUserSi
           {/* <Link href='/'> */}
           Buy
         </Link>
+        <Link href='/sell' className={getLinkClass('/sell')}>
+          {/* <Link href='/'> */}
+          Sell
+        </Link>
         <Link href='/rent' className={getLinkClass('/rent')}>
           {/* <Link href='/rent'>           */}
           Rent
@@ -108,7 +112,12 @@ const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor, isUserSi
 
       {isUserSignedIn === true ? <section className=' hidden items-center gap-4 md:flex lg:flex'>
         {/* <button className='btn bg-white flex text-[#06384A] text-sm font-semibold font-openSans rounded-3xl md:text-base lg:text-base'><FiPlus /> Create Lisiting</button> */}
-        <CreateListingDialog />
+        {/* <CreateListingDialog /> */}
+        <Link href='/create-listing'>
+        <button  className='btn bg-white flex text-[#06384A] text-sm font-semibold font-openSans rounded-3xl md:text-base lg:text-base'>
+        <FiPlus /> Create Lisiting
+      </button>
+        </Link>
         <img className="rounded-full w-7 h-7 object-cover md:w-10 md:h-10 lg:w-14 lg:h-14" src="https://images.unsplash.com/photo-1716724854567-9ec995836d19?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" alt="" />
           {/* <Image
             src={'https://unsplash.com/photos/a-squirrel-eating-a-nut-in-a-field-of-daisies-igYIeewfnOs'}
