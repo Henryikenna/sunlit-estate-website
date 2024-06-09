@@ -26,7 +26,7 @@ const Page = async ({ searchParams }: Props) => {
 
 
   return (
-    <div className='pt-[88px] '>
+    <div className='pt-[88px]'>
       <div className=' flex px-3 pt-6 md:pt-10 md:px-10 lg:px-[3.75rem]'>
         <div className=' flex flex-1 items-end gap-4 md:gap-6'>
           <button onClick={() => handlePageChange('sale')}>
