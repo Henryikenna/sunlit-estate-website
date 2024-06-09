@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
 import { FiPlus } from 'react-icons/fi'
@@ -7,7 +8,6 @@ import { FaGlobeAmericas } from "react-icons/fa";
 const filterButtonsTextList = ['Any', '1', '2', '3', '4', '5', '6', '7', '8+']
 const areaTextList = ['Hato', 'Nikiboko', 'locate various', 'Noord Saliña', 'Belnem', 'Sabal Palm', 'Santa Barbara', 'Suikerpalm']
 const houseVarietiesList = ['Pool', 'Parking', 'Garden', 'Balcony']
-
 
 
 const ListingRentPage = () => {
