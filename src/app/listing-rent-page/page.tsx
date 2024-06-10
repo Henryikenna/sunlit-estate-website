@@ -39,8 +39,8 @@ const ListingRentPage = () => {
   
           <section className=' px-5 pt-4 flex flex-col gap-8'>
             <div className=''>
-              <section className='flex items-center gap-5 pb-5 w-full'>
-                <div className='w-1/2'>
+              <section className='block lg:flex items-center gap-5 pb-5 w-full'>
+                <div className='w-full pb-5 lg:pb-0 lg:w-1/2'>
                   <h1 className=' font-openSans font-bold text-base pb-2'>Property Type</h1>
                   {/* <label className='input input-bordered flex items-center gap-2'>
                       <input type='text' className='grow' placeholder='Enter Property type' />
@@ -63,7 +63,7 @@ const ListingRentPage = () => {
                   </select>
                 </div>
   
-                <div className='w-1/2'>
+                <div className='w-full lg:w-1/2'>
                   <h1 className=' font-openSans font-bold text-base pb-2'>Property Name</h1>
                   <label className='input input-bordered flex items-center gap-2'>
                     <input type='text' className='grow' placeholder='Enter Property name' />
@@ -71,8 +71,8 @@ const ListingRentPage = () => {
                 </div>
               </section>
   
-              <section className='flex items-center gap-5 w-full'>
-                <div className='w-1/2'>
+              <section className='block lg:flex items-center gap-5 w-full'>
+                <div className='w-full pb-5 lg:pb-0 lg:w-1/2'>
                   <h1 className=' font-openSans font-bold text-base pb-2'>Address</h1>
                   <label className='input input-bordered flex items-center pr-0'>
                     <input type='text' className='grow' placeholder='Enter Property Address' />
@@ -82,7 +82,7 @@ const ListingRentPage = () => {
                   </label>
                 </div>
   
-                <div className='w-1/2'>
+                <div className='w-full lg:w-1/2'>
                   <h1 className=' font-openSans font-bold text-base pb-2'>Property URL</h1>
                   <label className='input input-bordered flex items-center pr-0'>
                     <input type='text' className='grow' placeholder='Enter Property URL' />
@@ -143,7 +143,7 @@ const ListingRentPage = () => {
               </section>
             </div>
   
-            <div className=''>
+            {/* <div className=''>
               <h1 className=' font-openSans font-bold text-lg pb-2'>Area</h1>
               <h3 className=' font-openSans text-sm'>Locate various regions</h3>
   
@@ -156,7 +156,7 @@ const ListingRentPage = () => {
                 ))}
               </section>
             </div>
-  
+   */}
             <div className='flex w-full gap-5'>
             <div className='w-1/3'>
                   <h1 className=' font-openSans font-semibold text-base pb-2'>Price</h1>

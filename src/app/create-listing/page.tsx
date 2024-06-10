@@ -14,12 +14,12 @@ const CreateListingPage = () => {
 
 
   return (
-    <div className=' pt-28 px-10 md:px-12 lg:px-16'>
+    <div className=' pt-28 px-1 md:px-12 lg:px-16'>
       <h4 className="text-[#1E1E1E] pb-5 text-2xl font-openSans font-bold text-center">Create Listing</h4>
 
       <hr className=' border-[#1E1E1E40] w-full' />
 
-      <div className=' flex justify-center items-end gap-4 pt-12 md:gap-6'>
+      <div className=' flex justify-center items-end gap-4 pt-5 md:pt-10 lg:pt-12 md:gap-6'>
           <button onClick={() => handlePageChange('sell')}>
               <h3 className={` font-openSans font-semibold text-base pt-1 border-b-4 ${selectedPage === 'sell' ? 'border-[#F6812D]' : 'border-transparent'} md:text-xl`}>Sell</h3>
           </button>

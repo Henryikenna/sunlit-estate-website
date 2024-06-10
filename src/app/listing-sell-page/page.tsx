@@ -2,8 +2,10 @@
 import { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
 import { FiPlus } from 'react-icons/fi'
-import { FaLocationDot, FaArrowRightLong } from "react-icons/fa6";
-import { FaGlobeAmericas } from "react-icons/fa";
+import { FaLocationDot, FaArrowRightLong } from 'react-icons/fa6'
+import { FaGlobeAmericas, FaRegFileAlt } from 'react-icons/fa'
+
+import axios from 'axios'
 
 const filterButtonsTextList = ['Any', '1', '2', '3', '4', '5', '6', '7', '8+']
 const areaTextList = ['Hato', 'Nikiboko', 'locate various', 'Noord Saliña', 'Belnem', 'Sabal Palm', 'Santa Barbara', 'Suikerpalm']
@@ -17,6 +19,45 @@ const ListingSellPage = () => {
   const bathroomsButtons = Array.from({ length: filterButtonsTextList.length }, (_, i) => i)
   const areas = Array.from({ length: areaTextList.length }, (_, i) => i)
   const houseVarieties = Array.from({ length: houseVarietiesList.length }, (_, i) => i)
+
+  const [file, setFile] = useState<File | null>(null)
+  const [fileURL, setFileURL] = useState<string | null>(null)
+  const [uploadStatus, setUploadStatus] = useState<string | null>(null)
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const selectedFile = event.target.files[0]
+      setFile(selectedFile)
+      setFileURL(URL.createObjectURL(selectedFile))
+    }
+  }
+
+  // const handleUpload = () => {
+  //   if (file) {
+  //     console.log('Uploading file:', file);
+  //     // Handle file upload logic here
+  //   }
+  // };
+
+  const handleUpload = async () => {
+    if (file) {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      try {
+        const response = await axios.post('/api/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        setUploadStatus('File uploaded successfully')
+        console.log(response.data)
+      } catch (error) {
+        setUploadStatus('File upload failed')
+        console.error(error)
+      }
+    }
+  }
 
   return (
     <div className='mt-4 md:mt-5 lg:mt-7'>
@@ -38,8 +79,8 @@ const ListingSellPage = () => {
 
         <section className=' px-5 pt-4 flex flex-col gap-8'>
           <div className=''>
-            <section className='flex items-center gap-5 pb-5 w-full'>
-              <div className='w-1/2'>
+            <section className='block lg:flex items-center gap-5 pb-5 w-full'>
+              <div className='w-full pb-5 lg:pb-0 lg:w-1/2'>
                 <h1 className=' font-openSans font-bold text-base pb-2'>Property Type</h1>
                 {/* <label className='input input-bordered flex items-center gap-2'>
                     <input type='text' className='grow' placeholder='Enter Property type' />
@@ -62,31 +103,31 @@ const ListingSellPage = () => {
                 </select>
               </div>
 
-              <div className='w-1/2'>
+              <div className='w-full lg:w-1/2'>
                 <h1 className=' font-openSans font-bold text-base pb-2'>Property Name</h1>
-                <label className='input input-bordered flex items-center gap-2'>
+                <label className='input input-bordered font-openSans flex items-center gap-2'>
                   <input type='text' className='grow' placeholder='Enter Property name' />
                 </label>
               </div>
             </section>
 
-            <section className='flex items-center gap-5 w-full'>
-              <div className='w-1/2'>
+            <section className='block lg:flex items-center gap-5 w-full'>
+              <div className='w-full pb-5 lg:pb-0 lg:w-1/2'>
                 <h1 className=' font-openSans font-bold text-base pb-2'>Address</h1>
-                <label className='input input-bordered flex items-center pr-0'>
+                <label className='input input-bordered font-openSans flex items-center pr-0'>
                   <input type='text' className='grow' placeholder='Enter Property Address' />
-                  <div className="bg-[#F6812D] flex items-center justify-center text-xl rounded-[8px] h-[3rem] w-[3rem] text-white">
-                  <FaLocationDot />
+                  <div className='bg-[#F6812D] flex items-center justify-center text-xl rounded-[8px] h-[3rem] w-[3rem] text-white'>
+                    <FaLocationDot />
                   </div>
                 </label>
               </div>
 
-              <div className='w-1/2'>
+              <div className='w-full lg:w-1/2'>
                 <h1 className=' font-openSans font-bold text-base pb-2'>Property URL</h1>
-                <label className='input input-bordered flex items-center pr-0'>
+                <label className='input input-bordered font-openSans flex items-center pr-0'>
                   <input type='text' className='grow' placeholder='Enter Property URL' />
-                  <div className="bg-[#F6812D] flex items-center justify-center text-xl rounded-[8px] h-[3rem] w-[3rem] text-white">
-                  <FaGlobeAmericas />
+                  <div className='bg-[#F6812D] flex items-center justify-center text-xl rounded-[8px] h-[3rem] w-[3rem] text-white'>
+                    <FaGlobeAmericas />
                   </div>
                 </label>
               </div>
@@ -132,7 +173,9 @@ const ListingSellPage = () => {
                 <button
                   key={`Button${button}`}
                   className={`btn rounded-full min-w-20 font-openSans text-xs font-semibold ${
-                    selectedBathroomButton === button ? 'btn-primary bg-[#06384A] border-none text-white hover:bg-[#06384A]' : 'btn-outline text-[#1E1E1ECC] hover:bg-transparent hover:text-[#1E1E1ECC]'
+                    selectedBathroomButton === button
+                      ? 'btn-primary bg-[#06384A] border-none text-white hover:bg-[#06384A]'
+                      : 'btn-outline text-[#1E1E1ECC] hover:bg-transparent hover:text-[#1E1E1ECC]'
                   }`}
                   onClick={() => setSelectedBathroomButton(button)}
                 >
@@ -142,7 +185,7 @@ const ListingSellPage = () => {
             </section>
           </div>
 
-          <div className=''>
+          {/* <div className=''>
             <h1 className=' font-openSans font-bold text-lg pb-2'>Area</h1>
             <h3 className=' font-openSans text-sm'>Locate various regions</h3>
 
@@ -155,37 +198,35 @@ const ListingSellPage = () => {
               ))}
             </section>
           </div>
-
+ */}
           <div className='flex w-full gap-5'>
-          <div className='w-1/3'>
-                <h1 className=' font-openSans font-semibold text-base pb-2'>Price</h1>
-                <label className='input input-bordered flex items-center gap-2 pr-0'>
-                  <input type='number' className='grow' placeholder='Enter Price' />
-                  <div className="flex items-center justify-center text-base font-openSans font-semibold rounded-[8px] h-[3rem] w-[3rem] text-[#06384A]">
-                  $
-                  </div>
-                </label>
-              </div>
+            <div className='w-1/3'>
+              <h1 className=' font-openSans font-semibold text-base pb-2'>Price</h1>
+              <label className='input input-bordered font-openSans flex items-center gap-2 pr-0'>
+                <input type='number' className='grow' placeholder='Enter Price' />
+                <div className='flex items-center justify-center text-base font-openSans font-semibold rounded-[8px] h-[3rem] w-[3rem] text-[#06384A]'>$</div>
+              </label>
+            </div>
 
-          <div className='w-1/3'>
-                <h1 className=' font-openSans font-semibold text-base pb-2'>Lot Size</h1>
-                <label className='input input-bordered flex items-center gap-2 pr-0'>
-                  <input type='number' className='grow' placeholder='200' />
-                  <div className="flex items-center justify-center text-base font-openSans font-semibold rounded-[8px] h-[3rem] w-[3rem] text-[#06384A]">
+            <div className='w-1/3'>
+              <h1 className=' font-openSans font-semibold text-base pb-2'>Lot Size</h1>
+              <label className='input input-bordered font-openSans flex items-center gap-2 pr-0'>
+                <input type='number' className='grow' placeholder='200' />
+                <div className='flex items-center justify-center text-base font-openSans font-semibold rounded-[8px] h-[3rem] w-[3rem] text-[#06384A]'>
                   m<sup>2</sup>
-                  </div>
-                </label>
-              </div>
+                </div>
+              </label>
+            </div>
 
-          <div className='w-1/3'>
-                <h1 className=' font-openSans font-semibold text-base pb-2'>Property Size</h1>
-                <label className='input input-bordered flex items-center gap-2 pr-0'>
-                  <input type='number' className='grow' placeholder='500' />
-                  <div className="flex items-center justify-center text-base font-openSans font-semibold rounded-[8px] h-[3rem] w-[3rem] text-[#06384A]">
+            <div className='w-1/3'>
+              <h1 className=' font-openSans font-semibold text-base pb-2'>Property Size</h1>
+              <label className='input input-bordered font-openSans flex items-center gap-2 pr-0'>
+                <input type='number' className='grow' placeholder='500' />
+                <div className='flex items-center justify-center text-base font-openSans font-semibold rounded-[8px] h-[3rem] w-[3rem] text-[#06384A]'>
                   m<sup>2</sup>
-                  </div>
-                </label>
-              </div>
+                </div>
+              </label>
+            </div>
           </div>
 
           <div className=''>
@@ -194,15 +235,85 @@ const ListingSellPage = () => {
 
             <section className=' pt-8'>
               {/* <input type="text" placeholder="Enter Description" className="input input-bordered w-full max-w-xs" /> */}
-              <textarea placeholder='Enter Description' className='input input-bordered w-full py-3 h-48' rows={8}></textarea>
+              <textarea placeholder='Enter Description' className='input input-bordered font-openSans w-full py-3 h-48' rows={8}></textarea>
             </section>
           </div>
 
+          <div className='w-full'>
+            <h1 className=' font-openSans font-bold text-lg pb-2'>Listed on:</h1>
+            <h3 className=' font-openSans text-sm'>Select your listed housing</h3>
 
-          <section className="pt-5">
-          <button className='btn btn-primary font-openSans rounded-full border-none text-white w-52 flex justify-center items-center float-right bg-[#F6812D] hover:bg-[#ed7b29]'>
-            Post item for Sale
-            <FaArrowRightLong />
+            <select className='select select-bordered w-full text-base mt-5'>
+              <option>Caribbean Homes</option>
+              <option>Sunbelt realty Bonaire</option>
+              <option>RE/MAX paradise Homes</option>
+            </select>
+          </div>
+
+          <div className='w-full'>
+            <h1 className=' font-openSans font-bold text-base pb-2'>YouTube URL:</h1>
+            <label className='input input-bordered font-openSans flex items-center pr-0'>
+              <input type='text' className='grow' placeholder='https://' />
+              <div className='bg-[#F6812D] flex items-center justify-center text-xl rounded-[8px] h-[3rem] w-[3rem] text-white'>
+                <FaLocationDot />
+              </div>
+            </label>
+          </div>
+
+          <div className='w-full'>
+            <h1 className=' font-openSans font-bold text-lg pb-2'>Upload photo</h1>
+            <h3 className=' font-openSans text-sm'>Upload photo or documents</h3>
+
+            {/* <select className='select select-bordered w-full text-base mt-5'>
+              <option>Caribbean Homes</option>
+              <option>Sunbelt realty Bonaire</option>
+              <option>RE/MAX paradise Homes</option>
+            </select> */}
+            <div className='flex flex-col items-center mt-8 justify-center h-screen border border-[#4295F280] rounded-[8px] bg-gray-100'>
+              <div className='w-full max-w-xs p-8 bg-white rounded-lg shadow-md'>
+                <div className='flex flex-col items-center mb-4'>
+                  <label htmlFor='file-upload' className='cursor-pointer'>
+                    <div className='flex flex-col items-center'>
+                      {/* <div className="w-16 h-16 mb-4 bg-gray-200 rounded-full flex items-center justify-center">
+               
+              </div> */}
+                      {file ? (
+                        <div className='flex flex-col items-center'>
+                          {/* <img src={fileURL!} alt="file-icon" className="w-16 h-16 mb-4" /> */}
+                          <FaRegFileAlt className='w-16 h-16 mb-4' />
+                          <span className='text-sm text-gray-600'>{file.name}</span>
+                        </div>
+                      ) : (
+                        <svg className='w-24' viewBox='0 0 177 176' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                          <circle opacity='0.5' cx='88.5004' cy='87.8178' r='87.1814' stroke='#BAC9D5' stroke-width='1.27272' />
+                          <circle cx='88.1871' cy='88.6759' r='50.7301' stroke='#BAC9D5' stroke-width='5.63668' />
+                          <path d='M95.4891 104.42H82.5478V87.1644H72.1084L89.0184 70.2544L105.928 87.1644H95.4891V104.42Z' fill='#F6812D' />
+                        </svg>
+                      )}
+
+                      <span className='text-sm text-gray-600 pt-5'>Drag files to upload, or</span>
+                      {/* <span className="text-sm text-blue-500">Choose File</span> */}
+                    </div>
+                  </label>
+                  <input id='file-upload' type='file' className='hidden' onChange={handleFileChange} />
+                  <section className='pt-4 justify-center flex items-center '>
+                    <button
+                      className='w-32 rounded-full font-semibold text-base text-center font-openSans px-4 py-2 text-white bg-[#F6812D] hover:bg-[#F6812D] focus:outline-none'
+                      // onClick={handleUpload}
+                      // onClick={handleFileChange}
+                    >
+                      Choose file
+                    </button>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section className='pt-5'>
+            <button className='btn btn-primary font-openSans rounded-full border-none text-white w-52 flex justify-center items-center float-right bg-[#F6812D] hover:bg-[#ed7b29]'>
+              Post item for Rent
+              <FaArrowRightLong />
             </button>
           </section>
 
