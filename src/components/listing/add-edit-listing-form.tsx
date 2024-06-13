@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import 'react-quill/dist/quill.snow.css' // Import Quill styles
+// import 'react-quill/dist/quill.snow.css' // Import Quill styles
 import clearCachesByTagServerAction from '../../cache/invalidate-cache'
 import { PROPERTY_CACHE } from '../../cache/keys'
 import { Listing, listingSchema } from '../../schemas/listing'
@@ -25,7 +25,7 @@ import { propertyWithImages } from '../../types/queries'
 
 config.apiKey = process.env.NEXT_PUBLIC_MAPTILER_API_KEY!
 
-const QuillEditor = dynamic(() => import('react-quill'), { ssr: false })
+// const QuillEditor = dynamic(() => import('react-quill'), { ssr: false })
 
 type PropertyKey =
   | 'status'
@@ -789,9 +789,9 @@ const AddEditListingForm = (props: Props) => {
                       </span>
                     </label>
 
-                    <div className={`${useQuill ? 'visible' : 'hidden'}`}>
+                    {/* <div className={`${useQuill ? 'visible' : 'hidden'}`}>
                       <QuillEditor value={description} onChange={handleEditorChange} modules={quillModules} formats={quillFormats} className='w-full h-[70%] bg-base prose max-w-none' />
-                    </div>
+                    </div> */}
                     <div className={`${!useQuill ? 'visible' : 'hidden'}`}>
                       <textarea className='textarea textarea-bordered textarea-md w-full min-h-96' {...register('description', { required: true })} />
                     </div>
