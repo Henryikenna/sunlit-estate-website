@@ -21,6 +21,8 @@ const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor }) => {
   const [isToggleChecked, setIsToggleChecked] = useState(false)
 
   const getLinkClass = (path: string) => (route === path ? 'font-openSans font-extrabold text-white text-base md:text-sm' : 'font-openSans font-semibold text-white opacity-80 text-base md:text-sm')
+  const getLinkClassPotrait = (path: string) =>
+    route === path ? 'font-openSans font-bold text-white opacity-100 p-2 bg-[#06384A] text-base md:text-sm' : 'font-openSans font-semibold text-black opacity-80 p-2 text-base hover:bg-gray-200 md:text-sm'
 
   // var isUserSignedIn = false;
   var isUserSignedIn: boolean = isToggleChecked
@@ -96,7 +98,7 @@ const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor }) => {
         <h4 className=' font-oswald font-bold text-white text-[0.545rem] w-[69px] md:text-[0.65rem] md:w-auto lg:text-sm lg:w-[111px]'>Sunlit Carribbean Estates</h4>
       </Link>
 
-      <section className='hidden items-center gap-6 md:flex lg:flex'>
+      <section className='hidden items-center gap-6 lg:flex'>
         <Link href='/buy' className={getLinkClass('/buy')}>
           {/* <Link href='/'> */}
           Buy
@@ -126,7 +128,7 @@ const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor }) => {
         </div>
 
         {isUserSignedIn ? (
-          <section className=' hidden items-center gap-4 md:flex lg:flex'>
+          <section className=' hidden items-center gap-4 lg:flex'>
             {/* <button className='btn bg-white flex text-[#06384A] text-sm font-semibold font-openSans rounded-3xl md:text-base lg:text-base'><FiPlus /> Create Lisiting</button> */}
             {/* <CreateListingDialog /> */}
             <Link href='/create-listing'>
@@ -150,7 +152,7 @@ const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor }) => {
           /> */}
           </section>
         ) : (
-          <section className=' hidden items-center gap-4 md:flex lg:flex'>
+          <section className=' hidden items-center gap-4 lg:flex'>
             <button className='btn bg-white text-[#06384A] w-28 text-base font-semibold font-openSans rounded-3xl md:w-24'>Login</button>
             <button className='btn btn-outline border-2 border-white text-white w-28 text-base font-semibold font-openSans rounded-3xl md:w-24 hover:text-white hover:bg-transparent hover:border-white'>
               Sign up
@@ -159,11 +161,95 @@ const NavBar: React.FC<NavBarProps> = ({ doesNavbarHaveBackgroundColor }) => {
         )}
       </section>
 
-      <section className='block md:hidden lg:hidden'>
+      {/* <section className='block md:hidden lg:hidden'>
         <svg width='34' height='20' viewBox='0 0 34 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
           <path d='M1 18.8889H33M1 9.99997H33M1 1.11108H33' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
         </svg>
-      </section>
+      </section> */}
+      <div className='drawer w-auto block lg:hidden'>
+        <input id='my-drawer-4' type='checkbox' className='drawer-toggle' />
+        <div className='drawer-content'>
+          {/* Page content here */}
+          {/* <label htmlFor='my-drawer-4' className='drawer-button btn btn-primary'>
+            Open drawer
+          </label> */}
+          <label htmlFor='my-drawer-4' className='drawer-button'>
+            <svg className='w-7 md:w-10' viewBox='0 0 34 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <path d='M1 18.8889H33M1 9.99997H33M1 1.11108H33' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
+            </svg>
+          </label>
+        </div>
+        <div className='drawer-side'>
+          <label htmlFor='my-drawer-4' aria-label='close sidebar' className='drawer-overlay'></label>
+          {/* <ul className='menu p-4 w-80 min-h-full bg-base-200 text-base-content'>
+            
+            <li>
+              <a>Sidebar Item 1</a>
+            </li>
+            <li>
+              <a>Sidebar Item 2</a>
+            </li>
+          </ul> */}
+          <div className='menu flex flex-col w-[80%] py-4 px-2 min-h-full bg-white'>
+            <section className=' flex gap-y-1 flex-col'>
+              <Link href='/buy' className={getLinkClassPotrait('/buy')}>
+                {/* <Link href='/'> */}
+                Buy
+              </Link>
+              {/* <Link href='/sell' className={getLinkClass('/sell')}>
+          Sell
+        </Link> */}
+              <Link href='/rent' className={getLinkClassPotrait('/rent')}>
+                {/* <Link href='/rent'>           */}
+                Rent
+              </Link>
+              <Link href='/realtors' className={getLinkClassPotrait('/realtors')}>
+                {/* <Link href='/realtors'> */}
+                Realtor
+              </Link>
+              <Link href='/aboutus' className={getLinkClassPotrait('/aboutus')}>
+                {/* <Link href='/aboutus'> */}
+                About Us
+              </Link>
+            </section>
+
+            <section className='mt-10'>
+              {isUserSignedIn ? (
+                <section className=' items-center justify-between flex'>
+                  {/* <button className='btn bg-white flex text-[#06384A] text-sm font-semibold font-openSans rounded-3xl md:text-base lg:text-base'><FiPlus /> Create Lisiting</button> */}
+                  {/* <CreateListingDialog /> */}
+                  <Link href='/create-listing'>
+                    <button className='btn bg-white flex text-[#06384A] text-sm font-semibold font-openSans rounded-3xl md:text-base lg:text-base'>
+                      <FiPlus /> Create Lisiting
+                    </button>
+                  </Link>
+                  <img
+                    className='rounded-full w-11 h-11 object-cover md:w-10 md:h-10 lg:w-14 lg:h-14'
+                    src='https://images.unsplash.com/photo-1716724854567-9ec995836d19?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8'
+                    alt=''
+                  />
+                  {/* <Image
+            src={'https://unsplash.com/photos/a-squirrel-eating-a-nut-in-a-field-of-daisies-igYIeewfnOs'}
+            alt='Profile Picture'
+            width={55}
+            height={55}
+            layout='fill'
+            objectFit='cover'
+            className='rounded-full w-14 h-14'
+          /> */}
+                </section>
+              ) : (
+                <section className=' items-center flex-col gap-4 flex'>
+                  <button className='btn bg-white w-full text-[#06384A] text-base font-semibold font-openSans rounded-3xl'>Login</button>
+                  <button className='btn btn-outline w-full border-2 border-[#06384A] text-[#06384A] text-base font-semibold font-openSans rounded-3xl'>
+                    Sign up
+                  </button>
+                </section>
+              )}
+            </section>
+          </div>
+        </div>
+      </div>
     </header>
   )
 }

@@ -20,24 +20,81 @@ const ListingSellPage = () => {
   const areas = Array.from({ length: areaTextList.length }, (_, i) => i)
   const houseVarieties = Array.from({ length: houseVarietiesList.length }, (_, i) => i)
 
+  // const [file, setFile] = useState<File | null>(null)
+  // const [fileURL, setFileURL] = useState<string | null>(null)
+  // const [uploadStatus, setUploadStatus] = useState<string | null>(null)
+
+  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.files && event.target.files[0]) {
+  //     const selectedFile = event.target.files[0]
+  //     setFile(selectedFile)
+  //     setFileURL(URL.createObjectURL(selectedFile))
+  //   }
+  // }
+
+  // // const handleUpload = () => {
+  // //   if (file) {
+  // //     console.log('Uploading file:', file);
+  // //     // Handle file upload logic here
+  // //   }
+  // // };
+
+  // const handleUpload = async () => {
+  //   if (file) {
+  //     const formData = new FormData()
+  //     formData.append('file', file)
+
+  //     try {
+  //       const response = await axios.post('/api/upload', formData, {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //       })
+  //       setUploadStatus('File uploaded successfully')
+  //       console.log(response.data)
+  //     } catch (error) {
+  //       setUploadStatus('File upload failed')
+  //       console.error(error)
+  //     }
+  //   }
+  // }
+
   const [file, setFile] = useState<File | null>(null)
   const [fileURL, setFileURL] = useState<string | null>(null)
+  const [fileExtension, setFileExtension] = useState<string | null>(null)
   const [uploadStatus, setUploadStatus] = useState<string | null>(null)
+
+  const supportedExtensions = ['png', 'jpg', 'jpeg', 'svg']
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const selectedFile = event.target.files[0]
+      const fileExt = selectedFile.name.split('.').pop()?.toLowerCase()
       setFile(selectedFile)
       setFileURL(URL.createObjectURL(selectedFile))
+      setFileExtension(fileExt || null) // Set the file extension
     }
   }
 
-  // const handleUpload = () => {
+  // const handleUpload = async () => {
   //   if (file) {
-  //     console.log('Uploading file:', file);
-  //     // Handle file upload logic here
+  //     const formData = new FormData()
+  //     formData.append('file', file)
+
+  //     try {
+  //       const response = await axios.post('/api/upload', formData, {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //       })
+  //       setUploadStatus('File uploaded successfully')
+  //       console.log(response.data)
+  //     } catch (error) {
+  //       setUploadStatus('File upload failed')
+  //       console.error(error)
+  //     }
   //   }
-  // };
+  // }
 
   const handleUpload = async () => {
     if (file) {
@@ -45,7 +102,7 @@ const ListingSellPage = () => {
       formData.append('file', file)
 
       try {
-        const response = await axios.post('/api/upload', formData, {
+        const response = await axios.post('./src/api/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -199,8 +256,8 @@ const ListingSellPage = () => {
             </section>
           </div>
  */}
-          <div className='flex w-full gap-5'>
-            <div className='w-1/3'>
+          <div className='flex flex-col w-full gap-5 md:flex-row'>
+            <div className='w-full md:w-1/3'>
               <h1 className=' font-openSans font-semibold text-base pb-2'>Price</h1>
               <label className='input input-bordered font-openSans flex items-center gap-2 pr-0'>
                 <input type='number' className='grow' placeholder='Enter Price' />
@@ -208,7 +265,7 @@ const ListingSellPage = () => {
               </label>
             </div>
 
-            <div className='w-1/3'>
+            <div className='w-full md:w-1/3'>
               <h1 className=' font-openSans font-semibold text-base pb-2'>Lot Size</h1>
               <label className='input input-bordered font-openSans flex items-center gap-2 pr-0'>
                 <input type='number' className='grow' placeholder='200' />
@@ -218,7 +275,7 @@ const ListingSellPage = () => {
               </label>
             </div>
 
-            <div className='w-1/3'>
+            <div className='w-full md:w-1/3'>
               <h1 className=' font-openSans font-semibold text-base pb-2'>Property Size</h1>
               <label className='input input-bordered font-openSans flex items-center gap-2 pr-0'>
                 <input type='number' className='grow' placeholder='500' />
@@ -269,20 +326,20 @@ const ListingSellPage = () => {
               <option>Sunbelt realty Bonaire</option>
               <option>RE/MAX paradise Homes</option>
             </select> */}
-            <div className='flex flex-col items-center mt-8 justify-center h-screen border border-[#4295F280] rounded-[8px] bg-gray-100'>
-              <div className='w-full max-w-xs p-8 bg-white rounded-lg shadow-md'>
+            <div className='flex flex-col items-center mt-8 justify-center py-2 border border-[#4295F280] rounded-[8px] bg-gray-100 lg:h-screen'>
+              {/* <div className='w-full max-w-xs p-8 bg-white rounded-lg shadow-md'>
                 <div className='flex flex-col items-center mb-4'>
                   <label htmlFor='file-upload' className='cursor-pointer'>
                     <div className='flex flex-col items-center'>
-                      {/* <div className="w-16 h-16 mb-4 bg-gray-200 rounded-full flex items-center justify-center">
-               
-              </div> */}
                       {file ? (
-                        <div className='flex flex-col items-center'>
-                          {/* <img src={fileURL!} alt="file-icon" className="w-16 h-16 mb-4" /> */}
-                          <FaRegFileAlt className='w-16 h-16 mb-4' />
-                          <span className='text-sm text-gray-600'>{file.name}</span>
-                        </div>
+                        {fileExtension == "png" || fileExtension == "jpg" || fileExtension == "svg" ? 
+                          <div className="flex flex-col items-center">
+                       <img src={fileURL!} alt="file-icon" className="w-16 h-16 mb-4" />
+                       <span className="text-sm text-gray-600">{file.name}</span>
+                       <span className="text-sm text-gray-600">{fileExtension}</span>
+                     </div> 
+                         : <span className="text-sm text-red-600">This file type is not supported</span>}
+                       
                       ) : (
                         <svg className='w-24' viewBox='0 0 177 176' fill='none' xmlns='http://www.w3.org/2000/svg'>
                           <circle opacity='0.5' cx='88.5004' cy='87.8178' r='87.1814' stroke='#BAC9D5' stroke-width='1.27272' />
@@ -292,7 +349,6 @@ const ListingSellPage = () => {
                       )}
 
                       <span className='text-sm text-gray-600 pt-5'>Drag files to upload, or</span>
-                      {/* <span className="text-sm text-blue-500">Choose File</span> */}
                     </div>
                   </label>
                   <input id='file-upload' type='file' className='hidden' onChange={handleFileChange} />
@@ -306,13 +362,101 @@ const ListingSellPage = () => {
                     </button>
                   </section>
                 </div>
+              </div> */}
+              {/* <div className='w-full max-w-xs p-8 bg-white rounded-lg shadow-md'>
+                <div className='flex flex-col items-center mb-4'>
+                  <label htmlFor='file-upload' className='cursor-pointer'>
+                    {file ? (
+                      fileExtension === 'png' || fileExtension === 'jpg' || fileExtension === 'svg' ? (
+                        <div className='flex flex-col items-center'>
+                          <img src={fileURL!} alt='file-icon' className='w-16 h-16 mb-4' />
+                          <span className='text-sm text-gray-600'>{file.name}</span>
+                        </div>
+                      ) : (
+                        <div className='flex flex-col items-center'>
+                           <span className='text-sm text-red-600 mb-1'>This file type is not supported</span>
+                          <span className='text-sm text-[#06384A]'>Click to try again</span>
+                          <input id='file-upload' type='file' className='hidden' onChange={handleFileChange} />
+                        </div>
+                       
+                      )
+                    ) : (
+                      <div className='flex flex-col items-center'>
+                        <div className='mb-4 '>
+                          <svg className='w-16 lg:w-20' viewBox='0 0 177 176' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                          <circle opacity='0.5' cx='88.5004' cy='87.8178' r='87.1814' stroke='#BAC9D5' stroke-width='1.27272' />
+                          <circle cx='88.1871' cy='88.6759' r='50.7301' stroke='#BAC9D5' stroke-width='5.63668' />
+                          <path d='M95.4891 104.42H82.5478V87.1644H72.1084L89.0184 70.2544L105.928 87.1644H95.4891V104.42Z' fill='#F6812D' />
+                        </svg>
+                        </div>
+                        <span className='text-sm text-gray-600'>Drag files to upload, or</span>
+                        <span className='text-sm text-[#06384A]'>Choose File</span>
+                      </div>
+                    )}
+                  </label>
+                  <input id='file-upload' type='file' className='hidden' onChange={handleFileChange} />
+                </div>
+                <section className="justify-center flex items-center">
+                <button className='w-32 rounded-full font-semibold text-base text-center font-openSans px-4 py-2 text-white bg-[#F6812D] hover:bg-[#F6812D] focus:outline-none' onClick={handleUpload}>
+                  Upload
+                </button>
+                </section>
+                {uploadStatus && <p className='mt-4 text-sm text-center text-gray-600'>{uploadStatus}</p>}
+              </div> */}
+              <div className='w-full max-w-xs p-8 bg-white rounded-lg shadow-md'>
+                <div className='flex flex-col items-center mb-4'>
+                  <label htmlFor='file-upload' className='cursor-pointer'>
+                    {file ? (
+                      supportedExtensions.includes(fileExtension || '') ? (
+                        // <div className='flex flex-col items-center'>
+                        //   <img src={fileURL!} alt='file-icon' className='w-16 h-16 mb-4' />
+                        //   <span className='text-sm text-gray-600 mb-2 max-w-20 justify-center flex items-center'>{file.name}</span>
+                        //   <span className='text-sm text-[#175d76] font-medium underline'>Click to re-upload</span>
+                        // </div>
+                        <div className='flex flex-col items-center'>
+                          <img src={fileURL!} alt='file-icon' className='w-16 h-16 mb-4' />
+                          <span className='text-sm text-gray-600 mb-2 text-ellipsis max-w-[60%] whitespace-nowrap overflow-auto'>{file.name}</span>
+                          <span className='text-sm text-[#175d76] font-medium underline'>Click to re-upload</span>
+                        </div>
+                      ) : (
+                        <div className='flex flex-col items-center'>
+                          <span className='text-sm text-red-600 mb-1'>This file type is not supported</span>
+                          <span className='text-sm text-[#175d76] font-medium underline'>Click to try again</span>
+                          <input id='file-upload' type='file' className='hidden' onChange={handleFileChange} />
+                        </div>
+                      )
+                    ) : (
+                      <div className='flex flex-col items-center'>
+                        <div className='mb-4'>
+                          <svg className='w-16 lg:w-20' viewBox='0 0 177 176' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                            <circle opacity='0.5' cx='88.5004' cy='87.8178' r='87.1814' stroke='#BAC9D5' strokeWidth='1.27272' />
+                            <circle cx='88.1871' cy='88.6759' r='50.7301' stroke='#BAC9D5' strokeWidth='5.63668' />
+                            <path d='M95.4891 104.42H82.5478V87.1644H72.1084L89.0184 70.2544L105.928 87.1644H95.4891V104.42Z' fill='#F6812D' />
+                          </svg>
+                        </div>
+                        <span className='text-sm text-gray-600'>Drag files to upload, or</span>
+                        <span className='text-sm text-[#175d76] font-medium underline'>Choose File</span>
+                      </div>
+                    )}
+                  </label>
+                  <input id='file-upload' type='file' className='hidden' onChange={handleFileChange} />
+                </div>
+                <section className='justify-center flex items-center'>
+                  <button
+                    className='w-32 rounded-full font-semibold text-base text-center font-openSans px-4 py-2 text-white bg-[#F6812D] hover:bg-[#F6812D] focus:outline-none'
+                    onClick={handleUpload}
+                  >
+                    Upload
+                  </button>
+                </section>
+                {uploadStatus ? <p className='mt-4 text-sm text-center text-green-600'>{uploadStatus}</p> : <p className='mt-4 text-sm text-center text-red-600'>{uploadStatus}</p>}
               </div>
             </div>
           </div>
 
           <section className='pt-5'>
             <button className='btn btn-primary font-openSans rounded-full border-none text-white w-52 flex justify-center items-center float-right bg-[#F6812D] hover:bg-[#ed7b29]'>
-              Post item for Rent
+              Post item for Sale
               <FaArrowRightLong />
             </button>
           </section>
