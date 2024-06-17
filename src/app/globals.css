@@ -9,6 +9,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  font-family: "Open Sans", sans-serif;
+}
+
 .embla__slide {
     flex: 0 0 auto; /* Adapt slide size to its content */
     min-width: 0;
@@ -18,3 +22,23 @@
 .range::-webkit-slider-thumb{
     background-color: #06384A;
 }
+
+
+
+/* styles.css */
+@keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .pop-animation {
+    animation: pop 0.3s ease-in-out;
+  }
+  

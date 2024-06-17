@@ -1,6 +1,8 @@
-'use client'
+'use client';
 // allowImportingTsExtension
 import Carousel from '@/components/Carousel'
+import Link from 'next/link';
+import { useRouter } from 'next/navigation'
 // import "@/components/listing/home-for-sale-listing-list.ts";
 
 // import Carousel from "../components/Carousel";
@@ -73,76 +75,38 @@ const homeForSaleListings = [
 ]
 
 const HomeForSalePage = () => {
+  const router = useRouter();
+
+  // const handleNavigation = (id: number) => {
+  //   router.push(`/listings/${id}`);
+  //   // router.push(`/details/${id}`);
+  // };
   
   return (
     <div className=' px-3 pt-6 w-full flex flex-wrap gap-y-5 md:px-5 md:gap-y-8 lg:gap-y-14'>
       {homeForSaleListings.map(({ id, images, type, address, price, lotSize, propertySize, location }) => (
         <div key={id} className=' flex flex-col w-1/2 md:w-1/3 lg:w-1/4 p-2'>
-          {/* <div key={id} className="carousel w-full">
-              {images.map((image, index) => (
-                <div
-                  key={`slide${id}-${index}`}
-                  id={`slide${id}-${index}`}
-                  className="carousel-item relative w-full"
-                >
-                  <img
-                    src={image}
-                    className=" w-full h-[144px] rounded-2xl object-cover md:h-[200px] lg:h-[272px]"
-                  />
-                  <div
-                    className={`absolute justify-between transform -translate-y-1/2 left-0 right-0 w-auto px-[0.375rem] top-1/2 lg:px-3 ${
-                      images.length == 1 ? "hidden" : "flex"
-                    }`}
-                  >
-                    {index > 0 ? (
-                      <a
-                        href={`#slide${id}-${index - 1}`}
-                        className="btn btn-circle btn-xs bg-[#1E1E1E] bg-opacity-60 text-white outline-none border-none lg:btn-sm"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        ❮
-                      </a>
-                    ) : (
-                      <a></a>
-                    )}
-
-                    {index < images.length - 1 ? (
-                      <a
-                        href={`#slide${id}-${(index + 1) % images.length}`}
-                        className="btn btn-circle btn-xs bg-[#1E1E1E] bg-opacity-60 text-white outline-none border-none lg:btn-sm"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        ❯
-                      </a>
-                    ) : (
-                      <a></a>
-                    )}
-                  </div>
-                  <div
-                    className={`absolute bottom-0 left-0 right-0 flex justify-center items-center content-center w-[164px] space-x-2 p-4 lg:w-[310px] ${
-                      images.length == 1 ? "hidden" : "flex"
-                    }`}
-                  >
-                    {images.slice(0, 5).map((_, dotIndex) => (
-                      <span
-                        key={dotIndex}
-                        className={`inline-block rounded-full h-1 w-1 lg:h-[0.4375rem] lg:w-[0.4375rem] ${
-                          dotIndex === index ? "bg-white" : "bg-gray-400"
-                        }`}
-                      ></span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div> */}
           <Carousel id={id} images={images} />
 
+          {/* <div key={id} onClick={() => handleNavigation(id)} className=' w-auto px-[0.625rem] pt-3 lg:pt-6 lg:px-[1.125rem]'> */}
+          {/* <Link href={`/listings?param1=value1&param2=value2`}> */}
+          <Link href={{
+            pathname: '/listings',
+            query: {
+              id: id,
+              images: images,
+              type: type,
+              address: address,
+              price: price,
+              lotSize: lotSize,
+              propertySize: propertySize,
+              location: location,
+            }
+          }}>
           <div key={id} className=' w-auto px-[0.625rem] pt-3 lg:pt-6 lg:px-[1.125rem]'>
-            {/* <h4 className=' font-openSans text-[0.625rem] pb-3 font-semibold text-[#1E1E1E] opacity-80 lg:pb-6 lg:text-base'>{type}</h4> */}
             <h4 className=' font-openSans text-[0.5625rem] pb-[0.4375rem] font-bold text-[#1E1E1E] opacity-90 lg:pb-3 lg:text-base'>{address}</h4>
             <h4 className=' font-openSans text-sm pb-[0.4375rem] font-extrabold text-[#1E1E1E] opacity-90 lg:pb-3 lg:text-lg'>{`€ ${price.toLocaleString()}`}</h4>
 
-            {/* <section className=' flex items-center justify-between pb-[0.4375rem]'> */}
             <section className=' flex items-center justify-between pb-3'>
               <div className=' flex items-center gap-1'>
                 <h5 className=' font-openSans text-[0.625rem] font-normal text-[#1E1E1E] opacity-70 lg:text-sm'>Lot:</h5>
@@ -159,15 +123,7 @@ const HomeForSalePage = () => {
                 </h5>
               </div>
             </section>
-            {/* <section className=" flex items-center justify-between pb-3 lg:pb-6">
-                <h5 className=" font-openSans text-[0.625rem] font-normal text-[#1E1E1E] opacity-70 lg:text-sm">
-                  Property:
-                </h5>
-                <h5 className=" font-openSans text-[0.625rem] font-normal text-[#1E1E1E] opacity-70 lg:text-sm">
-                  {`${propertySize} m`}
-                  <sup>2</sup>
-                </h5>
-              </section> */}
+            
             <section className=' flex items-center justify-between'>
               <h5 className=' font-openSans text-[0.625rem] font-semibold text-[#1E1E1E] opacity-70 lg:text-sm'>{location}</h5>
               <svg
@@ -187,10 +143,58 @@ const HomeForSalePage = () => {
               </svg>
             </section>
           </div>
+          </Link>
         </div>
       ))}
     </div>
   )
 }
 
+
 export default HomeForSalePage
+
+
+
+
+
+
+// const HomeForSalePage = () => {
+//   const router = useRouter()
+
+//   const handleItemClick = (id: number) => {
+//     router.push(`/details/${id}`)
+//   }
+
+//   return (
+//     <div className=' px-3 pt-6 w-full flex flex-wrap gap-y-5 md:px-5 md:gap-y-8 lg:gap-y-14'>
+//       {homeForSaleListings.map(({ id, images, type, address, price, lotSize, propertySize, location }) => (
+//         <div key={id} className=' flex flex-col w-1/2 md:w-1/3 lg:w-1/4 p-2' onClick={() => handleItemClick(id)}>
+//           <Carousel id={id} images={images} />
+//           <div className=' w-auto px-[0.625rem] pt-3 lg:pt-6 lg:px-[1.125rem]'>
+//             <h4 className=' font-openSans text-[0.5625rem] pb-[0.4375rem] font-bold text-[#1E1E1E] opacity-90 lg:pb-3 lg:text-base'>{address}</h4>
+//             <h4 className=' font-openSans text-sm pb-[0.4375rem] font-extrabold text-[#1E1E1E] opacity-90 lg:pb-3 lg:text-lg'>{`€ ${price.toLocaleString()}`}</h4>
+//             <section className=' flex items-center justify-between pb-3'>
+//               <div className=' flex items-center gap-1'>
+//                 <h5 className=' font-openSans text-[0.625rem] font-normal text-[#1E1E1E] opacity-70 lg:text-sm'>Lot:</h5>
+//                 <h5 className=' font-openSans text-[0.625rem] font-normal text-[#1E1E1E] opacity-70 lg:text-sm'>
+//                   {`${lotSize} m`}
+//                   <sup>2</sup>
+//                 </h5>
+//               </div>
+//               <div className=' flex items-center gap-1'>
+//                 <h5 className=' font-openSans text-[0.625rem] font-normal text-[#1E1E1E] opacity-70 lg:text-sm'>Property:</h5>
+//                 <h5 className=' font-openSans text-[0.625rem] font-normal text-[#1E1E1E] opacity-70 lg:text-sm'>
+//                   {`${propertySize} m`}
+//                   <sup>2</sup>
+//                 </h5>
+//               </div>
+//             </section>
+//             <section className=' flex items-center justify-between'>
+//               <h5 className=' font-openSans text-[0.625rem] font-semibold text-[#1E1E1E] opacity-70 lg:text-sm'>{location}</h5>
+//             </section>
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   )
+// }
