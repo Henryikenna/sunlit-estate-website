@@ -115,8 +115,8 @@ const ListingDetails = ({
 
   return (
     <div className='pt-[88px] px-3 md:px-10 lg:px-[3.75rem]'>
-      <section className='flex gap-6 pt-6 md:pt-10'>
-        <div className='flex flex-col gap-2'>
+      <section className='flex flex-col-reverse gap-3 pt-6 md:gap-6 md:pt-10 md:flex-row'>
+        <div className='flex flex-row gap-2 md:flex-col'>
           {/* {searchParams.images.map(({image})) } */}
           {searchParams.images.map((imageUrl, index) => (
             <img key={index} className='h-14 w-14 object-cover rounded-lg' src={imageUrl} alt={`Image ${index}`} />
@@ -192,46 +192,46 @@ const ListingDetails = ({
         </div>
       </section>
 
-      <section className='pt-4 flex justify-between'>
-        <h3 className='text-[#1E1E1EE5] text-3xl font-openSans font-semibold'>{searchParams.address}</h3>
+      <section className='pt-3 block justify-between md:pt-4 md:flex'>
+        <h3 className='text-[#1E1E1EE5] text-2xl pb-2 font-openSans font-semibold md:pb-0 md:text-3xl'>{searchParams.address}</h3>
 
-        <div className='flex gap-8'>
+        <div className='flex gap-5 md:gap-8'>
           <section className='flex flex-col'>
-            <h4 className='text-4xl text-[#1E1E1EB2] pb-1 font-openSans font-semibold'>{searchParams.lotSize} m²</h4>
-            <span className='text-[#1E1E1EB2] font-openSans font-normal text-xl'>Lots</span>
+            <h4 className='text-3xl text-[#1E1E1EB2] pb-[2px] font-openSans font-semibold md:pb-1 md:text-4xl'>{searchParams.lotSize} m²</h4>
+            <span className='text-[#1E1E1EB2] font-openSans font-normal text-lg md:text-xl'>Lots</span>
           </section>
           <section className='flex flex-col'>
-            <h4 className='text-4xl text-[#1E1E1EB2] pb-1 font-openSans font-semibold'>{searchParams.propertySize} m²</h4>
-            <span className='text-[#1E1E1EB2] font-openSans font-normal text-xl'>Property</span>
+            <h4 className='text-3xl text-[#1E1E1EB2] pb-[2px] font-openSans font-semibold md:pb-1 md:text-4xl'>{searchParams.propertySize} m²</h4>
+            <span className='text-[#1E1E1EB2] font-openSans font-normal text-lg md:text-xl'>Property</span>
           </section>
         </div>
       </section>
 
       <section className='pt-4'>
         <h4 className='text-[#1E1E1EB2] pb-1 text-xl font-normal'>Price</h4>
-        <h2 className='text-[#1E1E1EE5] text-5xl font-bold'>€ {searchParams.price.toLocaleString()}</h2>
+        <h2 className='text-[#1E1E1EE5] text-4xl font-bold md:text-5xl'>€ {searchParams.price.toLocaleString()}</h2>
       </section>
 
-      <section className='flex mt-10 gap-5'>
-        <div className=' w-2/5'>
+      <section className='flex flex-col-reverse mt-5 gap-5 lg:mt-10 lg:flex-row'>
+        <div className='w-full lg:w-2/5'>
           <section className=''>
-            <section className='flex gap-6'>
-              <span className='flex items-center gap-10'>
-                <h4 className='text-[#1E1E1EE5] font-openSans text-2xl font-semibold'>3</h4>
-                <IoBedOutline className='text-[#06384A] text-3xl' />
+            <section className='flex gap-3 md:gap-6'>
+              <span className='flex items-center gap-5 md:gap-10'>
+                <h4 className='text-[#1E1E1EE5] font-openSans text-xl font-semibold md:text-2xl'>3</h4>
+                <IoBedOutline className='text-[#06384A] text-2xl md:text-3xl' />
               </span>
-              <span className='flex items-center gap-10'>
-                <h4 className='text-[#1E1E1EE5] font-openSans text-2xl font-semibold'>2</h4>
-                <LiaBathSolid className='text-[#06384A] text-3xl' />
+              <span className='flex items-center gap-5 md:gap-10'>
+                <h4 className='text-[#1E1E1EE5] font-openSans text-xl font-semibold md:text-2xl'>2</h4>
+                <LiaBathSolid className='text-[#06384A] text-2xl md:text-3xl' />
               </span>
-              <span className='flex items-center gap-10'>
-                <h4 className='text-[#1E1E1EE5] font-openSans text-2xl font-semibold'>1</h4>
-                <LiaSwimmingPoolSolid className='text-[#06384A] text-3xl' />
+              <span className='flex items-center gap-5 md:gap-10'>
+                <h4 className='text-[#1E1E1EE5] font-openSans text-xl font-semibold md:text-2xl'>1</h4>
+                <LiaSwimmingPoolSolid className='text-[#06384A] text-2xl md:text-3xl' />
               </span>
             </section>
           </section>
 
-          <section className=' pt-8'>
+          <section className='pt-4 md:pt-6 lg:pt-8'>
             <div className=' flex items-end gap-4 md:gap-6'>
               <button onClick={() => handlePageChange('description')}>
                 <h3 className={` font-openSans font-semibold text-base pt-1 border-b-2 ${selectedPage === 'description' ? 'border-[#F6812D] text-[#F6812D]' : 'border-transparent'} md:text-xl`}>
@@ -275,7 +275,7 @@ const ListingDetails = ({
                 </ul>
               )}
               {selectedPage === 'propertyDetails' && (
-                <div className='mt-3 flex flex-col gap-3'>
+                <div className='mt-3 flex flex-col md:gap-3'>
                   <span className='flex justify-between px-2 py-[10px] shadow-sm'>
                     <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Name</h4>
                     <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Kaya Seminole 32, Noord Saliña</h5>
@@ -331,7 +331,7 @@ const ListingDetails = ({
             <div className='pt-3 flex justify-between items-end'>
               <section className=''>
                 <h5 className='text-sm text-[#1E1E1ECC] pb-[2px]'>Listed on:</h5>
-                <h3 className='text-[#1E1E1ECC] text-2xl font-openSans font-semibold'>Sunbelt Realty Bonaire</h3>
+                <h3 className='text-[#1E1E1ECC] text-xl font-openSans font-semibold md:text-2xl'>Sunbelt Realty Bonaire</h3>
               </section>
 
               <span className='flex items-center gap-1'>
@@ -344,12 +344,12 @@ const ListingDetails = ({
         </div>
 
         {/* <div className=""> */}
-        <img className='w-3/5 h-[530px] object-cover rounded-2xl' src='https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG91c2V8ZW58MHx8MHx8fDA%3D' alt='' />
+        <img className='w-full h-96 object-cover rounded-2xl lg:h-[530px] lg:w-3/5' src='https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG91c2V8ZW58MHx8MHx8fDA%3D' alt='' />
         {/* </div> */}
       </section>
 
       <section className='pt-14'>
-        <h4 className=' font-openSans text-[0.5625rem] pb-[0.4375rem] font-bold text-[#1E1E1EE5] md:pb-3 lg:text-2xl'>Listings handpick for you</h4>
+        <h4 className=' font-openSans text-base pb-[0.4375rem] font-bold text-[#1E1E1EE5] md:pb-3 lg:text-2xl'>Listings handpicked for you</h4>
 
         <div className='w-full flex flex-wrap gap-y-5 md:gap-y-8 lg:gap-y-14'>
           {homeForSaleListings.map(({ id, images, type, address, price, lotSize, propertySize, location }) => (
