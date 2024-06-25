@@ -272,10 +272,10 @@ const ListingDetails = ({
                     <h3 className='text-[#1E1E1ECC] flex items-center gap-2 text-xl font-openSans font-semibold md:text-2xl'>Sunbelt Realty Bonaire <LuLink className='text-base' /></h3>
                   </section>
 
-                  <span className='flex items-center gap-1'>
+                  {/* <span className='flex items-center gap-1'>
                     <FaRegEye className='text-[#F6812D]' />
                     <h5 className='text-[#F6812D] font-semibold text-sm font-openSans'>View listings</h5>
-                  </span>
+                  </span> */}
                 </div>
                 <button className='btn btn-primary font-openSans h-14 mt-5 rounded-[8px] border-none text-white w-full flex justify-center bg-[#F6812D] hover:bg-[#ed7b29]'>Rent/Buy</button>
               </section>
