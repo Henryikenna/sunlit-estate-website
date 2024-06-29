@@ -109,9 +109,9 @@ const ListingDetails = ({
   //   setCurrentSlide((prev) => (prev < searchParams.images.length - 1 ? prev + 1 : 0))
   // }
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedPage, setSelectedPage] = useState('description');
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [selectedPage, setSelectedPage] = useState('description')
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const handlePrev = () => {
     setCurrentSlide((prev) => (prev > 0 ? prev - 1 : searchParams.images.length - 1))
@@ -121,15 +121,18 @@ const ListingDetails = ({
     setCurrentSlide((prev) => (prev < searchParams.images.length - 1 ? prev + 1 : 0))
   }
 
-
   const handlePageChange = (page: SetStateAction<string>) => {
     setSelectedPage(page)
   }
 
+  const handleThumbnailClick = (index: number) => {
+    setCurrentSlide(index)
+  }
+
   const toggleSection = (event: any) => {
-    event.preventDefault();
-    setIsExpanded(!isExpanded);
-  };
+    event.preventDefault()
+    setIsExpanded(!isExpanded)
+  }
 
   return (
     <div className='pt-[88px] px-3 md:px-10 lg:px-[3.75rem]'>
@@ -169,7 +172,7 @@ const ListingDetails = ({
           {searchParams.images.map((imageUrl, index) => (
             <div className='relative'>
               <img key={index} className='h-14 w-14 object-cover rounded-lg' src={imageUrl} alt={`Image ${index}`} />
-              <div className={`${index === currentSlide ? '' : 'absolute inset-0 bg-white bg-opacity-50'}`}></div>
+              <div onClick={() => handleThumbnailClick(index)} className={`${index === currentSlide ? '' : 'absolute inset-0 bg-white bg-opacity-50'} cursor-pointer`}></div>
             </div>
           ))}
         </div>
@@ -360,80 +363,82 @@ const ListingDetails = ({
                 </Link>
               </h4>
 
-              {isExpanded && (<div className=''>
-                <section className='mt-4'>
-                  <h3 className='w-fit font-openSans font-semibold text-base pt-1 border-b-2 border-[#F6812D] text-[#F6812D] md:text-xl'>Features</h3>
-                  <ul className='pt-3 pl-5 font-openSans text-[#1E1E1EE5] list-disc'>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Three spacious bedrooms, all with air conditioning and ceiling fans</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Three bathrooms and a laundry room</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Cozy living room ideal for social gatherings</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Separate storage space in the garden</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Outdoor kitchen for preparing meals in the fresh air</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Covered carport for multiple cars</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Roof terrace with views of the surroundings</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Only 8 minutes to the center of Kralendijk</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Beautiful tropical garden with lush vegetation</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Only 8 minutes to the center of Kralendijk</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Ceramic tiles throughout the house and covered terrace</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Composite roof with ceramic tiles</li>
-                    <li className='font-openSans text-[#1E1E1EE5]'>Hardwood windows and doors with mosquito nets and shutters</li>
-                  </ul>
-                </section>
+              {isExpanded && (
+                <div className=''>
+                  <section className='mt-4'>
+                    <h3 className='w-fit font-openSans font-semibold text-base pt-1 border-b-2 border-[#F6812D] text-[#F6812D] md:text-xl'>Features</h3>
+                    <ul className='pt-3 pl-5 font-openSans text-[#1E1E1EE5] list-disc'>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Three spacious bedrooms, all with air conditioning and ceiling fans</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Three bathrooms and a laundry room</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Cozy living room ideal for social gatherings</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Separate storage space in the garden</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Outdoor kitchen for preparing meals in the fresh air</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Covered carport for multiple cars</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Roof terrace with views of the surroundings</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Only 8 minutes to the center of Kralendijk</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Beautiful tropical garden with lush vegetation</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Only 8 minutes to the center of Kralendijk</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Ceramic tiles throughout the house and covered terrace</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Composite roof with ceramic tiles</li>
+                      <li className='font-openSans text-[#1E1E1EE5]'>Hardwood windows and doors with mosquito nets and shutters</li>
+                    </ul>
+                  </section>
 
-                <section className='mt-4'>
-                  <h3 className='w-fit font-openSans font-semibold text-base pt-1 border-b-2 border-[#F6812D] text-[#F6812D] md:text-xl'>Property details</h3>
-                  <div className='mt-3 flex flex-col md:gap-3'>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Name</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Kaya Seminole 32, Noord Saliña</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Area</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Noord Saliña</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Address</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Kaya Seminole 32</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Type</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>house</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Price</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>$ 385,000</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Lot size</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>222m²</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Property size</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>69m²</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Bedrooms</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>3</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Pool</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Yes</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Garden</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>No</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Balcony</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>No</h5>
-                    </span>
-                    <span className='flex justify-between px-2 py-[10px] shadow-sm'>
-                      <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Parking</h4>
-                      <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Yes</h5>
-                    </span>
-                  </div>
-                </section>
-              </div>)}
+                  <section className='mt-4'>
+                    <h3 className='w-fit font-openSans font-semibold text-base pt-1 border-b-2 border-[#F6812D] text-[#F6812D] md:text-xl'>Property details</h3>
+                    <div className='mt-3 flex flex-col md:gap-3'>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Name</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Kaya Seminole 32, Noord Saliña</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Area</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Noord Saliña</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Address</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Kaya Seminole 32</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Type</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>house</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Price</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>$ 385,000</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Lot size</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>222m²</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Property size</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>69m²</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Bedrooms</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>3</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Pool</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Yes</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Garden</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>No</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Balcony</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>No</h5>
+                      </span>
+                      <span className='flex justify-between px-2 py-[10px] shadow-sm'>
+                        <h4 className='text-[#1E1E1EE5] font-openSans font-semibold'>Parking</h4>
+                        <h5 className='text-[#1E1E1EE5] font-openSans font-normal'>Yes</h5>
+                      </span>
+                    </div>
+                  </section>
+                </div>
+              )}
 
               <div className='pt-3 flex justify-between items-end'>
                 <section className=''>
